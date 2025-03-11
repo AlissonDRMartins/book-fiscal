@@ -1,5 +1,6 @@
 from typing import Dict, List, Tuple
 
+
 LIMITS = [180000, 360000, 720000, 1800000, 3600000, 4800000]
 
 TAX_RATES: Dict[int, List[Tuple[float, int]]] = {
@@ -46,10 +47,10 @@ TAX_RATES: Dict[int, List[Tuple[float, int]]] = {
 }
 
 MAP_ANEXO: Dict[int, List[int]] = {
-    0: [1],  # Comércio -> Anexo 1
-    1: [2],  # Indústria -> Anexo 2
-    2: [3, 4, 5],  # Outros -> Anexos 3, 4, 5
-    3: [1, 2, 3, 4, 5],  # Todos os Anexos
+    0: [1],
+    1: [2],
+    2: [3, 4, 5],
+    3: [1, 2, 3, 4, 5],
 }
 
 MESES_PTBR = [
