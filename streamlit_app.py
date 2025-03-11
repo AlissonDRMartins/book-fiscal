@@ -256,7 +256,7 @@ def main():
       <em>Este simulador é apenas uma ferramenta de referência. Para cálculos oficiais, contate um de nossos especialistas.</em>
     </div>
     <div class="contact">
-      <a href="tel:+551145261077">(11) 4526-1077</a>
+      <p>(11) 4526-1077</p>
     </div>
   </div>
 </footer>
