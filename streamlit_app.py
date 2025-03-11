@@ -253,7 +253,7 @@ def main():
       © 2025 Talst Contabilidade. Todos os direitos reservados.
     </div>
     <div class="disclaimer">
-      <em>Este simulador é apenas uma ferramenta de referência. Para cálculos oficiais, contate um de nossos especialistas.</em>
+      <em>Este simulador é apenas uma ferramenta de referência. Para mais detalhes, contate um de nossos especialistas.</em>
     </div>
     <div class="contact">
       <p>(11) 4526-1077</p>
