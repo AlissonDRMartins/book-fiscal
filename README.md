@@ -6,7 +6,7 @@
 
 *Uma ferramenta simplificada para calcular impostos do Simples Nacional para empresas brasileiras*
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](TODO) 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://talstbook.streamlit.app/) 
 [![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -25,7 +25,7 @@ O **Simulador Simples Nacional** é uma aplicação web desenvolvida com Streaml
 
 ## 🚀 Como Usar
 
-1. Acesse a [aplicação online](TODO)
+1. Acesse a [aplicação online](https://talstbook.streamlit.app/)
 2. Selecione a categoria do seu negócio (Comércio, Indústria, ou Outros)
 3. Insira o valor da receita bruta dos últimos 12 meses
 4. Visualize os resultados com alíquotas nominais, efetivas e valores a serem pagos
