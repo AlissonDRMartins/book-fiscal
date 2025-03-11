@@ -1,20 +1,79 @@
 import streamlit as st
 import pandas as pd
-from typing import Union, Tuple
-from constants import *
+from typing import Union, Tuple, Dict, List
+
+
+LIMITS = [180000, 360000, 720000, 1800000, 3600000, 4800000]
+
+TAX_RATES: Dict[int, List[Tuple[float, int]]] = {
+    1: [
+        (4.0, 0),
+        (7.3, 5940),
+        (9.5, 13860),
+        (10.7, 22500),
+        (14.3, 87300),
+        (19.0, 378000),
+    ],
+    2: [
+        (4.5, 0),
+        (7.8, 5940),
+        (10.0, 13860),
+        (11.2, 22500),
+        (14.7, 85500),
+        (30.0, 720000),
+    ],
+    3: [
+        (6.0, 0),
+        (11.2, 9360),
+        (13.5, 17640),
+        (16.0, 35640),
+        (21.0, 125640),
+        (33.0, 648000),
+    ],
+    4: [
+        (4.5, 0),
+        (9.0, 8100),
+        (10.2, 12420),
+        (14.0, 39780),
+        (22.0, 183780),
+        (33.0, 828000),
+    ],
+    5: [
+        (15.5, 0),
+        (18.0, 4500),
+        (19.5, 9900),
+        (20.5, 17100),
+        (23.0, 62100),
+        (30.5, 540000),
+    ],
+}
+
+MAP_ANEXO: Dict[int, List[int]] = {
+    0: [1],
+    1: [2],
+    2: [3, 4, 5],
+    3: [1, 2, 3, 4, 5],
+}
+
+MESES_PTBR = [
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro",
+]
+
+CATEGORIES = {0: "Comércio", 1: "Indústria", 2: "Outros", 3: "Todos os Anexos"}
 
 
 def calculate_tax(rbt12: Union[int, float], anexo: int) -> Tuple[float, float]:
-    """
-    Calculate tax rate and deduction based on revenue and tax annex.
-
-    Args:
-        rbt12: Revenue for the last 12 months
-        anexo: Tax annex number (1-5)
-
-    Returns:
-        Tuple of (tax_rate, deduction)
-    """
     if anexo not in TAX_RATES:
         raise ValueError(f"Anexo desconhecido: {anexo}")
 
@@ -28,16 +87,6 @@ def calculate_tax(rbt12: Union[int, float], anexo: int) -> Tuple[float, float]:
 
 
 def calculate_effective_rate(rbt12: Union[int, float], anexo: int) -> float:
-    """
-    Calculate the effective tax rate after applying deductions.
-
-    Args:
-        rbt12: Revenue for the last 12 months
-        anexo: Tax annex number (1-5)
-
-    Returns:
-        Effective tax rate as a percentage
-    """
     if rbt12 <= 0:
         return 0.0
 
@@ -46,16 +95,6 @@ def calculate_effective_rate(rbt12: Union[int, float], anexo: int) -> float:
 
 
 def calculate_tax_amount(rbt12: Union[int, float], anexo: int) -> float:
-    """
-    Calculate the actual tax amount to be paid.
-
-    Args:
-        rbt12: Revenue for the last 12 months
-        anexo: Tax annex number (1-5)
-
-    Returns:
-        Tax amount in currency units
-    """
     if rbt12 <= 0:
         return 0.0
 
@@ -64,15 +103,6 @@ def calculate_tax_amount(rbt12: Union[int, float], anexo: int) -> float:
 
 
 def formatar_moeda(valor: Union[float, str, None]) -> str:
-    """
-    Format a value as Brazilian currency (R$)
-
-    Args:
-        valor: The value to format
-
-    Returns:
-        Formatted string in Brazilian currency format
-    """
     if pd.isna(valor) or valor is None or valor == "":
         return "R$ 0,00"
 
@@ -94,11 +124,26 @@ def formatar_moeda(valor: Union[float, str, None]) -> str:
 
 
 def setup_page():
-    """Configure the Streamlit page settings and header"""
     st.set_page_config(
         page_title="Simulador Simples Nacional",
         layout="wide",
         initial_sidebar_state="collapsed",
+    )
+
+    # Force light mode
+    st.markdown(
+        """
+        <style>
+        :root {
+            --background-color: #ffffff;
+            --secondary-background-color: #f0f2f6;
+            --primary-color: #3498db;
+            --text-color: #2c3e50;
+            --font: "Source Sans Pro", sans-serif;
+        }
+        </style>
+    """,
+        unsafe_allow_html=True,
     )
 
     col1, col2, col3 = st.columns([1, 2, 1])
@@ -131,12 +176,6 @@ def setup_page():
 
 
 def category_selection() -> int:
-    """
-    Display category selection and return the selected category key
-
-    Returns:
-        The key of the selected category
-    """
     st.write(
         """
         <h3 style='color: #2c3e50;'>
@@ -160,12 +199,6 @@ def category_selection() -> int:
 
 
 def revenue_input() -> float:
-    """
-    Display revenue input section and return the input value
-
-    Returns:
-        User-entered revenue amount
-    """
     st.markdown(
         "<hr style='height: 1px; border: none; background-color: #e0e0e0;'>",
         unsafe_allow_html=True,
@@ -198,13 +231,6 @@ def revenue_input() -> float:
 
 
 def display_results(selected_key: int, total_faturamento: float):
-    """
-    Display tax calculation results
-
-    Args:
-        selected_key: Selected category key
-        total_faturamento: Total revenue for the last 12 months
-    """
     st.markdown(
         "<hr style='height: 1px; border: none; background-color: #e0e0e0;'>",
         unsafe_allow_html=True,
@@ -244,13 +270,6 @@ def display_results(selected_key: int, total_faturamento: float):
 
 
 def display_annex_calculation(anexo: int, total_faturamento: float):
-    """
-    Display calculation details for a specific annex
-
-    Args:
-        anexo: Tax annex number
-        total_faturamento: Total revenue for the last 12 months
-    """
     nominal_rate, deduction = calculate_tax(total_faturamento, anexo)
     effective_rate = calculate_effective_rate(total_faturamento, anexo)
     tax_amount = calculate_tax_amount(total_faturamento, anexo)
@@ -284,7 +303,6 @@ def display_annex_calculation(anexo: int, total_faturamento: float):
 
 
 def main():
-    """Main application function"""
     setup_page()
 
     selected_key = category_selection()
@@ -292,7 +310,6 @@ def main():
 
     display_results(selected_key, total_faturamento)
 
-    # Footer
     st.markdown(
         "<hr style='height: 1px; border: none; background-color: #e0e0e0;'>",
         unsafe_allow_html=True,
