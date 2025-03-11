@@ -6,7 +6,7 @@
 
 *Uma ferramenta simplificada para calcular impostos do Simples Nacional para empresas brasileiras*
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://simulador-simples-nacional.streamlit.app/) 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](TODO) 
 [![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -25,7 +25,7 @@ O **Simulador Simples Nacional** é uma aplicação web desenvolvida com Streaml
 
 ## 🚀 Como Usar
 
-1. Acesse a [aplicação online](https://simulador-simples-nacional.streamlit.app/)
+1. Acesse a [aplicação online](TODO)
 2. Selecione a categoria do seu negócio (Comércio, Indústria, ou Outros)
 3. Insira o valor da receita bruta dos últimos 12 meses
 4. Visualize os resultados com alíquotas nominais, efetivas e valores a serem pagos
@@ -36,14 +36,14 @@ Para executar o simulador em seu ambiente local:
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/simulador-simples-nacional.git
-cd simulador-simples-nacional
+git clone https://github.com/AlissonDRMartins/book-fiscal.git
+cd book-fiscal
 
 # Instale as dependências
 pip install -r requirements.txt
 
 # Execute a aplicação
-streamlit run app.py
+streamlit run streamlit_app.py
 ```
 
 ### 📦 Requisitos
@@ -88,6 +88,6 @@ Este projeto está licenciado sob a licença MIT - veja o arquivo LICENSE para m
 
 <div align="center">
   
-Desenvolvido com ❤️ por [Talst Contabilidade](https://www.talst.com.br)
+Desenvolvido com ❤️ por [Alisson Martins](https://github.com/AlissonDRMartins)
   
 </div>
