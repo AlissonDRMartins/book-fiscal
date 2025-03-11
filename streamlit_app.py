@@ -1,76 +1,7 @@
 import streamlit as st
 import pandas as pd
 from typing import Union, Tuple, Dict, List
-
-
-LIMITS = [180000, 360000, 720000, 1800000, 3600000, 4800000]
-
-TAX_RATES: Dict[int, List[Tuple[float, int]]] = {
-    1: [
-        (4.0, 0),
-        (7.3, 5940),
-        (9.5, 13860),
-        (10.7, 22500),
-        (14.3, 87300),
-        (19.0, 378000),
-    ],
-    2: [
-        (4.5, 0),
-        (7.8, 5940),
-        (10.0, 13860),
-        (11.2, 22500),
-        (14.7, 85500),
-        (30.0, 720000),
-    ],
-    3: [
-        (6.0, 0),
-        (11.2, 9360),
-        (13.5, 17640),
-        (16.0, 35640),
-        (21.0, 125640),
-        (33.0, 648000),
-    ],
-    4: [
-        (4.5, 0),
-        (9.0, 8100),
-        (10.2, 12420),
-        (14.0, 39780),
-        (22.0, 183780),
-        (33.0, 828000),
-    ],
-    5: [
-        (15.5, 0),
-        (18.0, 4500),
-        (19.5, 9900),
-        (20.5, 17100),
-        (23.0, 62100),
-        (30.5, 540000),
-    ],
-}
-
-MAP_ANEXO: Dict[int, List[int]] = {
-    0: [1],
-    1: [2],
-    2: [3, 4, 5],
-    3: [1, 2, 3, 4, 5],
-}
-
-MESES_PTBR = [
-    "Janeiro",
-    "Fevereiro",
-    "Março",
-    "Abril",
-    "Maio",
-    "Junho",
-    "Julho",
-    "Agosto",
-    "Setembro",
-    "Outubro",
-    "Novembro",
-    "Dezembro",
-]
-
-CATEGORIES = {0: "Comércio", 1: "Indústria", 2: "Outros", 3: "Todos os Anexos"}
+from constants import *
 
 
 def calculate_tax(rbt12: Union[int, float], anexo: int) -> Tuple[float, float]:
@@ -316,10 +247,61 @@ def main():
     )
     st.markdown(
         """
-        <div style="text-align: center; color: #7f8c8d; font-size: 0.8em; margin-top: 30px;">
-            © 2025 Talst Contabilidade. Todos os direitos reservados.<br>
-            <em>Este simulador é apenas uma ferramenta de referência. Para cálculos oficiais, consulte um contador.</em>
-        </div>
+        <footer class="footer">
+  <div class="footer-content">
+    <div class="copyright">
+      © 2025 Talst Contabilidade. Todos os direitos reservados.
+    </div>
+    <div class="disclaimer">
+      <em>Este simulador é apenas uma ferramenta de referência. Para cálculos oficiais, contate um de nossos especialistas.</em>
+    </div>
+    <div class="contact">
+      <a href="tel:+551145261077">(11) 4526-1077</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    border-top: 1px solid #e9ecef;
+    margin-top: 40px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .copyright {
+    color: #495057;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+  }
+  
+  .disclaimer {
+    color: #6c757d;
+    font-size: 0.8em;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  
+  .contact a {
+    color: #0066cc;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  
+  .contact a:hover {
+    color: #004d99;
+    text-decoration: underline;
+  }
+</style>
         """,
         unsafe_allow_html=True,
     )
